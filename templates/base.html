@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>DClass Registration Site</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class='navbar-brand' href="{% url 'home'%}">DClass Registration</a>
+        <ul class="navbar-nav navbar-right">
+          {% if user.is_authenticated %}
+              <li class="nav-item"><a class="nav-link" href="{% url 'classes:for_student' username=user.username %}">Profile</a></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'classes:all' %}">Classes</a></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'students:logout' %}">Logout</a></li>
+          {% else %}
+              <li class="nav-item"><a class="nav-link" href="{% url 'students:login' %}">Login</a></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'students:signup' %}">Sign Up</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+      {% block content %}{% endblock content %}
+    </div>
+  </body>
+</html>

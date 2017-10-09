@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{school_class.name}}</h1>
+<p>{{school_class.description}}</p>
+<h5>Teacher: {{school_class.teacher}}</h5>
+<h5>Days of week: {{school_class.days_of_week}}</h5>
+<h5>Start time: {{school_class.start_time}}</h5>
+<h5>End time: {{school_class.end_time}}</h5>
+<h5>Location: {{school_class.location}}</h5>
+{% if school_class in student_classes %}
+    <a class="btn btn-large btn-primary" href="{% url 'classes:remove' pk=school_class.pk username=user.username %}">Remove Class</a>
+{% else %}
+    <a class="btn btn-large btn-primary" href="{% url 'classes:add' pk=school_class.pk username=user.username %}">Add Class</a>
+{% endif %}
+
+
+{% endblock content %}

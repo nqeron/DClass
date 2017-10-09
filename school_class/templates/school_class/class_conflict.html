@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>You already have a class at one of these time slots!</h1>
+{% for class in conflicts %}
+    <h5>{{class.name}}</h5>
+{% endfor %}
+
+{% endblock content %}

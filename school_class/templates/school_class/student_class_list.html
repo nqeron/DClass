@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="col-md-4">
+  <h2>{{classes_student.username}}</h2>
+</div>
+<div class="col-md-8">
+  {% for class in classes %}
+  <div class="school_class">
+    <h2><a href="{% url 'classes:single' pk=class.pk username=user.username %}">{{class.name}}</a></h2>
+  </div>
+  {% endfor %}
+
+  <a class="btn btn-default btn-large" href="{% url 'classes:all' %}">Add a Class</a>
+</div>
+{% endblock content %}

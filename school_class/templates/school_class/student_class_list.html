@@ -13,4 +13,35 @@
 
   <a class="btn btn-default btn-large" href="{% url 'classes:all' %}">Add a Class</a>
 </div>
+<div class="col-md-4">
+  <table>
+    <tr>
+      <td>Times</td>
+      <td>Monday</td>
+      <td>Tuesday</td>
+      <td>Wednesday</td>
+      <td>Thursday</td>
+      <td>Friday</td>
+    </tr>
+      {% for sch in sched%}
+      <tr>
+        <td>
+          {% for t in sch|slice:":1" %}
+              {{t}}
+          {% endfor %}
+        </td>
+        {% for day in sch|slice:"1:" %}
+            <td>
+              {% for class in day %}
+                  {{class.name}}
+              {% endfor %}
+            </td>
+        {% endfor %}
+
+          {# <td>{{sch}}</td> #}
+      </tr>
+      {% endfor %}
+    </tr>
+  </table>
+</div>
 {% endblock content %}

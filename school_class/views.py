@@ -3,6 +3,7 @@ from django.http import Http404,HttpResponseRedirect
 from django.views import generic
 from school_class.models import SchoolClass
 from django.urls import reverse
+import datetime
 # from django.contrib.auth import get_user_model
 from students.models import Student
 # Create your views here.
@@ -45,8 +46,18 @@ class StudentClasses(generic.ListView):
 
     def get_context_data(self,**kwargs):
         context = super().get_context_data(**kwargs)
-        context['classes_student'] = self.classes_student
-        # class_times = self.classes_student.getClassTimes()
+        student = self.classes_student
+        context['classes_student'] = student
+        _times = [datetime.time(x,y) for x in range(7,19) for y in range(0,31,30)]
+        full_sched = []
+        for time in _times:
+            days = [time]
+            for day in ['M','T','W','Th','F']:
+                days.append(student.getClassAt(time,day))
+            full_sched.append(days)
+        context['sched'] = full_sched
+        # context['times'] = _times
+        #class_times = self.classes_student.getClassTimes()
         return context
 
 class Conflict(generic.TemplateView):
